@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CERELYTIC — Deep Tech Forge</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --void-black: #000000;
+    --signal-white: #FFFFFF;
+    --gray-secondary: #333333;
+    --gray-light: #666666;
+    --gray-border: #E5E5E5;
+    --accent-blue: #0066FF;
+    --accent-cyan: #00D9FF;
+    --accent-purple: #8B5CF6;
+    --accent-orange: #FF6B35;
+    --accent-green: #10B981;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--signal-white);
+    color: var(--void-black);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 24px; }
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 1002;
+    background: var(--void-black);
+    border: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.mobile-menu-toggle span {
+    width: 24px; height: 2px;
+    background: var(--signal-white);
+    transition: all 0.3s ease;
+    display: block;
+}
+.mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+.mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+@media (max-width: 768px) { .mobile-menu-toggle { display: flex; } }
+
+/* Navigation */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--gray-border);
+    animation: slideDown 0.6s ease-out;
+}
+.scroll-progress {
+    position: absolute; bottom: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple));
+    width: 0%; transition: width 0.1s ease-out; z-index: 1001;
+}
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+nav .container {
+    display: flex; justify-content: space-between; align-items: center; height: 80px;
+}
+.logo {
+    font-family: var(--font-mono); font-size: 20px; font-weight: 600;
+    letter-spacing: -0.5px; color: var(--void-black);
+}
+.nav-links { display: flex; gap: 48px; list-style: none; }
+.nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--gray-secondary);
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: color 0.2s ease-out; position: relative;
+}
+.nav-links a:hover { color: var(--void-black); }
+.nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--void-black);
+    transition: width 0.2s ease-out;
+}
+.nav-links a:hover::after { width: 100%; }
+
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed; top: 80px; left: 0; right: 0;
+        flex-direction: column; background: var(--void-black);
+        padding: 32px 24px; gap: 24px;
+        transform: translateX(100%); transition: transform 0.3s ease;
+    }
+    .nav-links.active { transform: translateX(0); }
+    .nav-links a { color: var(--signal-white); font-size: 16px; }
+    .nav-links a::after { background: var(--signal-white); }
+}
+
+/* ============ HERO ============ */
+.hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; padding-top: 80px; overflow: hidden;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+}
+.hero-background {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;
+}
+#nodeCanvas {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+.hero::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%);
+    border-radius: 50%; animation: float 20s ease-in-out infinite; z-index: 0;
+}
+.hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+    border-radius: 50%; animation: float 15s ease-in-out infinite reverse; z-index: 0;
+}
+@keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(30px,-30px) scale(1.1); }
+}
+.hero-content {
+    position: relative; z-index: 1; animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.hero-subtitle {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-light);
+    margin-bottom: 24px; animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-title {
+    font-size: clamp(48px,8vw,96px); font-weight: 700; line-height: 1.1;
+    letter-spacing: -2px; margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    background: linear-gradient(135deg, #000000 0%, #0066FF 50%, #8B5CF6 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-description {
+    font-size: clamp(18px,2vw,24px); color: var(--gray-secondary);
+    max-width: 720px; line-height: 1.6; margin-bottom: 48px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+.hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 36px; background: var(--void-black); color: var(--signal-white);
+    text-decoration: none; font-size: 16px; font-weight: 500; letter-spacing: 0.5px;
+    border: 1px solid var(--void-black); transition: all 0.2s ease-out;
+    animation: fadeInUp 0.8s ease-out 0.6s both; position: relative; overflow: hidden;
+}
+.hero-cta:hover { background: var(--signal-white); color: var(--void-black); }
+.hero-cta::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: var(--signal-white); transition: left 0.3s ease-out; z-index: -1;
+}
+.hero-cta:hover::before { left: 0; }
+
+/* Floating badges in hero */
+.hero-badges {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 1;
+}
+.hero-badge {
+    position: absolute; display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,0.08); border-radius: 40px;
+    padding: 10px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    opacity: 0; animation: badgeFadeIn 0.8s ease-out forwards;
+}
+.hero-badge .badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+.hero-badge span { font-size: 13px; font-weight: 500; color: var(--gray-secondary); font-family: var(--font-sans); }
+
+.hero-badge-1 { top: 18%; right: 12%; animation-delay: 1s; }
+.hero-badge-2 { top: 42%; right: 6%; animation-delay: 1.3s; }
+.hero-badge-3 { top: 68%; right: 15%; animation-delay: 1.6s; }
+.hero-badge-4 { top: 30%; right: 28%; animation-delay: 1.1s; }
+
+@keyframes badgeFadeIn {
+    from { opacity: 0; transform: translateY(15px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 968px) { .hero-badges { display: none; } }
+
+/* ============ SECTIONS ============ */
+section { padding: 160px 0; position: relative; }
+.section-header { margin-bottom: 80px; }
+.section-label {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-light); margin-bottom: 16px;
+}
+.section-title {
+    font-size: clamp(36px,5vw,56px); font-weight: 700;
+    letter-spacing: -1px; line-height: 1.2;
+}
+
+/* ============ CAPABILITIES ============ */
+.capabilities-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+    gap: 2px; background: var(--gray-border); border: 1px solid var(--gray-border);
+}
+@media (max-width: 768px) { .capabilities-grid { grid-template-columns: 1fr; } }
+
+.capability-card {
+    background: var(--signal-white); padding: 60px 48px;
+    position: relative; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer; transform-origin: center;
+    opacity: 0; transform: translateX(-100px);
+}
+.capability-card.animate-in:nth-child(1) { animation: slideInFromLeft 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s both; }
+.capability-card.animate-in:nth-child(2) { animation: slideInFromLeft 0.8s cubic-bezier(0.4,0,0.2,1) 0.3s both; }
+.capability-card.animate-in:nth-child(3) { animation: slideInFromLeft 0.8s cubic-bezier(0.4,0,0.2,1) 0.5s both; }
+@keyframes slideInFromLeft {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.capability-card:hover { background: #FAFAFA; transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.capability-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.capability-card:hover::before { width: 100%; }
+.capability-card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue)); }
+.capability-card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple)); }
+
+.capability-icon {
+    width: 64px; height: 64px; margin-bottom: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--gray-border); transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    background: var(--signal-white);
+}
+.capability-card:hover .capability-icon { border-color: var(--accent-blue); background: rgba(0,102,255,0.05); transform: scale(1.1) rotate(5deg); }
+.capability-card:nth-child(2):hover .capability-icon { border-color: var(--accent-purple); background: rgba(139,92,246,0.05); }
+.capability-card:nth-child(3):hover .capability-icon { border-color: var(--accent-orange); background: rgba(255,107,53,0.05); }
+
+.capability-number { font-family: var(--font-mono); font-size: 11px; color: var(--gray-light); margin-bottom: 12px; letter-spacing: 1px; }
+.capability-title { font-size: 28px; font-weight: 600; margin-bottom: 16px; letter-spacing: -0.5px; }
+.capability-description { font-size: 16px; color: var(--gray-secondary); line-height: 1.7; }
+
+.capability-visual {
+    position: absolute; right: 48px; bottom: 48px; opacity: 0.2;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1); width: 120px; height: 120px; transform: scale(0.9);
+}
+.capability-card:hover .capability-visual { opacity: 0.6; transform: scale(1) rotate(5deg); }
+
+/* Click hint */
+.click-hint {
+    position: absolute; bottom: 24px; left: 48px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--gray-light);
+    letter-spacing: 1px; opacity: 0; transform: translateY(6px);
+    transition: all 0.3s ease; pointer-events: none;
+}
+.capability-card:hover .click-hint { opacity: 1; transform: translateY(0); }
+
+/* ============ CAPABILITY MODAL ============ */
+.modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+    opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex; align-items: center; justify-content: center; padding: 40px;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-panel {
+    background: #fff; max-width: 760px; width: 100%; max-height: 85vh;
+    overflow-y: auto; border-radius: 12px;
+    transform: translateY(40px) scale(0.97); transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+}
+.modal-overlay.active .modal-panel { transform: translateY(0) scale(1); }
+
+.modal-close {
+    position: absolute; top: 20px; right: 24px; width: 36px; height: 36px;
+    background: none; border: 1px solid var(--gray-border); border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; z-index: 10; font-size: 18px; color: var(--gray-light);
+}
+.modal-close:hover { background: var(--void-black); color: #fff; border-color: var(--void-black); }
+
+.modal-header-bar {
+    height: 6px; width: 100%; border-radius: 12px 12px 0 0;
+}
+.modal-header-bar.blue { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+.modal-header-bar.purple { background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue)); }
+.modal-header-bar.orange { background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple)); }
+
+.modal-body { padding: 48px; }
+.modal-body .modal-number {
+    font-family: var(--font-mono); font-size: 11px; color: var(--gray-light); letter-spacing: 1px; margin-bottom: 12px;
+}
+.modal-body .modal-title {
+    font-size: 34px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 20px; color: var(--void-black);
+}
+.modal-body .modal-desc {
+    font-size: 16px; color: var(--gray-secondary); line-height: 1.8; margin-bottom: 32px;
+}
+.modal-body .modal-features { list-style: none; padding: 0; margin-bottom: 32px; }
+.modal-body .modal-features li {
+    padding: 14px 0; border-bottom: 1px solid #f0f0f0;
+    display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: var(--gray-secondary); line-height: 1.6;
+}
+.modal-body .modal-features li:last-child { border-bottom: none; }
+.modal-features .feat-icon {
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.feat-icon.blue { background: rgba(0,102,255,0.08); color: var(--accent-blue); }
+.feat-icon.purple { background: rgba(139,92,246,0.08); color: var(--accent-purple); }
+.feat-icon.orange { background: rgba(255,107,53,0.08); color: var(--accent-orange); }
+.feat-icon.green { background: rgba(16,185,129,0.08); color: var(--accent-green); }
+.feat-icon.cyan { background: rgba(0,217,255,0.08); color: var(--accent-cyan); }
+
+.modal-stat-row {
+    display: flex; gap: 16px; flex-wrap: wrap;
+}
+.modal-stat {
+    flex: 1; min-width: 140px; padding: 20px; border-radius: 10px;
+    background: #f8fafc; border: 1px solid #eef2f7; text-align: center;
+}
+.modal-stat .ms-val {
+    font-family: var(--font-mono); font-size: 28px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.modal-stat .ms-label { font-size: 12px; color: var(--gray-light); margin-top: 4px; }
+
+/* ============ STATS ============ */
+.stats-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+    border-top: 1px solid var(--gray-border);
+    position: relative; overflow: hidden;
+}
+.stats-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+}
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 60px; }
+@media (max-width: 968px) { .stats-grid { grid-template-columns: repeat(2,1fr); gap: 40px; } }
+@media (max-width: 568px) { .stats-grid { grid-template-columns: 1fr; } }
+
+.stat-item {
+    text-align: center; padding: 40px 20px; border-radius: 12px;
+    background: var(--signal-white); border: 1px solid var(--gray-border);
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
+    opacity: 0; transform: translateX(-60px);
+}
+.stat-item.animate-in:nth-child(1) { animation: slideInFromLeft 0.6s cubic-bezier(0.4,0,0.2,1) 0.1s both; }
+.stat-item.animate-in:nth-child(2) { animation: slideInFromLeft 0.6s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+.stat-item.animate-in:nth-child(3) { animation: slideInFromLeft 0.6s cubic-bezier(0.4,0,0.2,1) 0.3s both; }
+.stat-item.animate-in:nth-child(4) { animation: slideInFromLeft 0.6s cubic-bezier(0.4,0,0.2,1) 0.4s both; }
+
+.stat-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    transform: scaleX(0); transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.stat-item:hover::before { transform: scaleX(1); }
+.stat-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,102,255,0.1); border-color: var(--accent-blue); }
+.stat-item:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); }
+.stat-item:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-purple), var(--accent-orange)); }
+.stat-item:nth-child(4)::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-green)); }
+
+.stat-number {
+    font-family: var(--font-mono); font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 12px; line-height: 1;
+}
+.stat-item:nth-child(2) .stat-number { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-item:nth-child(3) .stat-number { background: linear-gradient(135deg, var(--accent-purple), var(--accent-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-item:nth-child(4) .stat-number { background: linear-gradient(135deg, var(--accent-orange), var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-number::after { content: '%'; font-size: 32px; margin-left: 4px; }
+.stat-item:nth-child(2) .stat-number::after, .stat-item:nth-child(4) .stat-number::after { content: ''; }
+.stat-item:nth-child(3) .stat-number::after { content: '%'; }
+
+.stat-label { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-secondary); margin-bottom: 8px; }
+.stat-description { font-size: 13px; color: var(--gray-light); line-height: 1.6; }
+
+/* ============ CLC VERTICALS ============ */
+.clc-section {
+    background: #FAFAFA; border-top: 1px solid var(--gray-border); border-bottom: 1px solid var(--gray-border);
+}
+.clc-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 80px; }
+@media (max-width: 968px) { .clc-grid { grid-template-columns: 1fr; gap: 60px; } }
+
+.clc-item {
+    position: relative; padding: 48px; border-radius: 8px;
+    background: var(--signal-white); border: 1px solid var(--gray-border);
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1); overflow: hidden;
+    opacity: 0; transform: translateX(-80px); cursor: pointer;
+}
+.clc-item.animate-in:nth-child(1) { animation: slideInFromLeft 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+.clc-item.animate-in:nth-child(2) { animation: slideInFromLeft 0.8s cubic-bezier(0.4,0,0.2,1) 0.4s both; }
+
+.clc-item::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0;
+    background: linear-gradient(180deg, var(--accent-green), var(--accent-cyan));
+    transition: height 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.clc-item:hover { transform: translateX(8px); border-color: var(--accent-green); box-shadow: 0 12px 32px rgba(16,185,129,0.15); }
+.clc-item:hover::before { height: 100%; }
+.clc-item:nth-child(2)::before { background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple)); }
+.clc-item:nth-child(2):hover { border-color: var(--accent-blue); box-shadow: 0 12px 32px rgba(0,102,255,0.15); }
+
+.clc-bg-pattern {
+    position: absolute; top: 20px; right: 20px; width: 200px; height: 200px;
+    opacity: 0.3; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events: none;
+}
+.clc-item:hover .clc-bg-pattern { opacity: 0.5; transform: scale(1.1) rotate(5deg); }
+
+.clc-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--signal-white); margin-bottom: 20px;
+    font-weight: 600; display: inline-block; padding: 8px 16px;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 4px;
+}
+.clc-item:nth-child(2) .clc-label { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
+.clc-title { font-size: 32px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.5px; }
+.clc-description { font-size: 16px; color: var(--gray-secondary); line-height: 1.8; }
+.clc-click-hint {
+    margin-top: 20px; font-family: var(--font-mono); font-size: 11px;
+    color: var(--accent-green); letter-spacing: 1px; opacity: 0;
+    transform: translateY(4px); transition: all 0.3s ease;
+}
+.clc-item:nth-child(2) .clc-click-hint { color: var(--accent-blue); }
+.clc-item:hover .clc-click-hint { opacity: 1; transform: translateY(0); }
+
+/* ============ ENGINE ============ */
+.engine-section { background: var(--void-black); color: var(--signal-white); }
+.engine-section .section-label, .engine-section .section-title { color: var(--signal-white); }
+.engine-section .section-label { color: var(--gray-light); }
+.process-flow { margin-top: 80px; }
+.flow-diagram { margin-bottom: 60px; opacity: 0.8; animation: fadeInUp 0.8s ease-out 0.6s both; }
+.flow-diagram svg { width: 100%; height: auto; }
+@media (max-width: 968px) { .flow-diagram { display: none; } }
+
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; position: relative; }
+@media (max-width: 968px) { .process-steps { grid-template-columns: 1fr; gap: 60px; } }
+
+.process-step {
+    position: relative; padding: 32px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    opacity: 0; transform: translateX(-60px);
+}
+.process-step.animate-in:nth-child(1) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s both, floatCard1 4.2s ease-in-out 0.8s infinite; }
+.process-step.animate-in:nth-child(2) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.3s both, floatCard2 5.1s ease-in-out 1.0s infinite; }
+.process-step.animate-in:nth-child(3) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.5s both, floatCard3 4.6s ease-in-out 1.2s infinite; }
+.process-step.animate-in:nth-child(4) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.7s both, floatCard4 5.4s ease-in-out 1.4s infinite; }
+
+@keyframes floatCard1 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); box-shadow: 0 4px 12px rgba(0,102,255,0.1); }
+    50%       { transform: translateY(-10px) rotate(0.4deg); box-shadow: 0 18px 36px rgba(0,102,255,0.22); }
+}
+@keyframes floatCard2 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); box-shadow: 0 4px 12px rgba(0,217,255,0.1); }
+    50%       { transform: translateY(-13px) rotate(-0.3deg); box-shadow: 0 20px 40px rgba(0,217,255,0.2); }
+}
+@keyframes floatCard3 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); box-shadow: 0 4px 12px rgba(139,92,246,0.1); }
+    50%       { transform: translateY(-9px) rotate(0.5deg); box-shadow: 0 16px 32px rgba(139,92,246,0.22); }
+}
+@keyframes floatCard4 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); box-shadow: 0 4px 12px rgba(16,185,129,0.1); }
+    50%       { transform: translateY(-12px) rotate(-0.4deg); box-shadow: 0 18px 38px rgba(16,185,129,0.2); }
+}
+
+.process-step:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+.process-step:nth-child(1) { border-top: 3px solid var(--accent-blue); }
+.process-step:nth-child(2) { border-top: 3px solid var(--accent-cyan); }
+.process-step:nth-child(3) { border-top: 3px solid var(--accent-purple); }
+.process-step:nth-child(4) { border-top: 3px solid var(--accent-green); }
+.step-number { font-family: var(--font-mono); font-size: 14px; color: var(--gray-light); margin-bottom: 16px; letter-spacing: 1px; font-weight: 600; }
+.process-step:nth-child(1) .step-number { color: var(--accent-blue); }
+.process-step:nth-child(2) .step-number { color: var(--accent-cyan); }
+.process-step:nth-child(3) .step-number { color: var(--accent-purple); }
+.process-step:nth-child(4) .step-number { color: var(--accent-green); }
+.step-title { font-size: 24px; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.5px; }
+.step-description { font-size: 15px; color: var(--gray-light); line-height: 1.7; }
+.process-connector { position: absolute; top: 30px; left: 100%; width: 40px; height: 1px; background: var(--gray-secondary); display: none; }
+@media (min-width: 969px) { .process-connector { display: block; } .process-step:last-child .process-connector { display: none; } }
+
+/* Tech viz */
+.tech-visualization { margin-top: 100px; }
+.tech-viz-title { font-size: 28px; font-weight: 600; color: var(--signal-white); margin-bottom: 48px; text-align: center; }
+.tech-viz-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+@media (max-width: 968px) { .tech-viz-grid { grid-template-columns: 1fr; gap: 24px; } }
+.tech-viz-card {
+    padding: 40px 32px; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; text-align: center;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1); opacity: 0; transform: translateX(-60px);
+}
+.tech-viz-card.animate-in:nth-child(1) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+.tech-viz-card.animate-in:nth-child(2) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.4s both; }
+.tech-viz-card.animate-in:nth-child(3) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.6s both; }
+.tech-viz-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-8px); }
+.tech-viz-icon { width: 100px; height: 100px; margin: 0 auto 24px; }
+.tech-viz-icon svg { width: 100%; height: 100%; }
+.tech-viz-card h4 { font-size: 20px; font-weight: 600; color: var(--signal-white); margin-bottom: 12px; }
+.tech-viz-card p { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+
+/* ============ ROADMAP ============ */
+#roadmap { background: var(--signal-white); }
+.roadmap-timeline { margin-top: 80px; position: relative; }
+
+/* vertical line */
+.roadmap-timeline::before {
+    content: ''; position: absolute; left: 100px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
+}
+@media (max-width: 768px) { .roadmap-timeline::before { left: 24px; } }
+
+.timeline-item {
+    display: grid; grid-template-columns: 200px 1fr; gap: 60px;
+    margin-bottom: 72px; padding-bottom: 72px; position: relative;
+    opacity: 0; transform: translateX(-100px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.timeline-item.animate-in { opacity: 1; transform: translateX(0); }
+.timeline-item:last-child { margin-bottom: 0; padding-bottom: 0; }
+@media (max-width: 768px) { .timeline-item { grid-template-columns: 1fr; gap: 24px; padding-left: 56px; } }
+
+/* Dot on the line */
+.timeline-item .timeline-dot {
+    position: absolute; left: 100px; top: 28px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--signal-white); border: 3px solid var(--accent-blue);
+    transform: translateX(-50%); z-index: 1; transition: all 0.4s ease;
+    box-shadow: 0 0 0 4px rgba(0,102,255,0.12);
+}
+.timeline-item:nth-child(2) .timeline-dot { border-color: var(--accent-purple); box-shadow: 0 0 0 4px rgba(139,92,246,0.12); }
+.timeline-item:nth-child(3) .timeline-dot { border-color: var(--accent-green); box-shadow: 0 0 0 4px rgba(16,185,129,0.12); }
+@media (max-width: 768px) { .timeline-item .timeline-dot { left: 24px; } }
+
+.timeline-version {
+    font-family: var(--font-mono); font-size: 48px; font-weight: 600;
+    line-height: 1; text-align: right; padding-right: 40px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.timeline-item:nth-child(2) .timeline-version { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.timeline-item:nth-child(3) .timeline-version { background: linear-gradient(135deg, var(--accent-purple), var(--accent-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.timeline-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-light); margin-top: 8px; text-align: right; padding-right: 40px; }
+
+.timeline-content {
+    background: #f8fafc; border: 1px solid #eef2f7; border-radius: 12px;
+    padding: 36px 40px; transition: all 0.3s ease;
+}
+.timeline-item:hover .timeline-content { border-color: #dce8f5; box-shadow: 0 8px 32px rgba(0,102,255,0.06); }
+.timeline-item:nth-child(2):hover .timeline-content { border-color: #e4dcf5; box-shadow: 0 8px 32px rgba(139,92,246,0.06); }
+.timeline-item:nth-child(3):hover .timeline-content { border-color: #dcf5ec; box-shadow: 0 8px 32px rgba(16,185,129,0.06); }
+
+.timeline-content h3 { font-size: 24px; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.5px; }
+.timeline-content > p { font-size: 15px; color: var(--gray-secondary); line-height: 1.8; margin-bottom: 20px; }
+.timeline-content ul { list-style: none; padding: 0; }
+.timeline-content li {
+    font-size: 14px; color: var(--gray-secondary); padding: 10px 0 10px 28px;
+    position: relative; line-height: 1.6; border-bottom: 1px solid #eef2f7;
+}
+.timeline-content li:last-child { border-bottom: none; }
+.timeline-content li::before { content: '→'; position: absolute; left: 0; color: var(--accent-blue); }
+.timeline-item:nth-child(2) .timeline-content li::before { color: var(--accent-purple); }
+.timeline-item:nth-child(3) .timeline-content li::before { color: var(--accent-green); }
+
+/* ============ MANIFESTO ============ */
+.manifesto-section {
+    background: #FAFAFA; border-top: 1px solid var(--gray-border);
+    position: relative; overflow: hidden;
+}
+.manifesto-section::before {
+    content: ''; position: absolute; top: 0; left: -50%; width: 200%; height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(139,92,246,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(0,102,255,0.03) 0%, transparent 50%);
+    animation: manifesto-bg 20s ease-in-out infinite; pointer-events: none;
+}
+@keyframes manifesto-bg { 0%,100% { transform: translateX(0); } 50% { transform: translateX(10%); } }
+
+.manifesto-content { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; }
+.manifesto-text { font-size: 20px; line-height: 1.9; color: var(--gray-secondary); margin-bottom: 32px; }
+.manifesto-text strong { color: var(--void-black); font-weight: 600; }
+
+.manifesto-quote {
+    font-size: 30px; font-weight: 600; line-height: 1.5; color: var(--void-black);
+    margin: 56px 0; padding: 40px 48px; letter-spacing: -0.5px; position: relative;
+    background: linear-gradient(135deg, rgba(0,102,255,0.04), rgba(139,92,246,0.04));
+    border-radius: 16px; border-left: 4px solid transparent;
+    border-image: linear-gradient(180deg, var(--accent-blue), var(--accent-purple)) 1;
+    border-image-slice: 1; border-top-left-radius: 0; border-bottom-left-radius: 0;
+}
+.manifesto-quote::before {
+    content: '"'; position: absolute; left: 20px; top: 10px;
+    font-size: 100px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    opacity: 0.12; font-family: Georgia, serif; line-height: 1;
+}
+
+/* Case Studies */
+.case-studies-visual { margin-top: 80px; }
+.case-studies-title { font-size: 32px; font-weight: 600; text-align: center; margin-bottom: 48px; color: var(--void-black); }
+.case-studies-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+@media (max-width: 968px) { .case-studies-grid { grid-template-columns: 1fr; } }
+
+.case-study-card {
+    background: var(--signal-white); border: 1px solid var(--gray-border);
+    border-radius: 12px; overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    opacity: 0; transform: translateX(-60px);
+}
+.case-study-card.animate-in:nth-child(1) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+.case-study-card.animate-in:nth-child(2) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.4s both; }
+.case-study-card.animate-in:nth-child(3) { animation: slideInFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.6s both; }
+.case-study-card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(0,0,0,0.12); border-color: transparent; }
+.case-study-image { width: 100%; height: 200px; overflow: hidden; }
+.case-study-image svg { width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.case-study-card:hover .case-study-image svg { transform: scale(1.05); }
+.case-study-content { padding: 24px; }
+.case-study-content h4 { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--void-black); }
+.case-study-content p { font-size: 14px; color: var(--gray-secondary); line-height: 1.7; }
+
+/* ============ CONTACT / MEETING ============ */
+.contact-section {
+    background: var(--void-black); color: var(--signal-white); padding: 140px 0;
+}
+.contact-header { text-align: center; margin-bottom: 72px; }
+.contact-header .section-title { color: var(--signal-white); }
+.contact-header .section-label { color: var(--gray-light); }
+.contact-header p { color: var(--gray-light); font-size: 17px; max-width: 560px; margin: 18px auto 0; line-height: 1.7; }
+
+.meeting-wrapper {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+@media (max-width: 768px) { .meeting-wrapper { grid-template-columns: 1fr; } }
+
+/* Left panel — calendar */
+.meeting-calendar {
+    background: #0a0a0a; padding: 48px 40px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.cal-header h3 { font-size: 18px; font-weight: 600; color: var(--signal-white); }
+.cal-nav { display: flex; gap: 8px; }
+.cal-nav button {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--signal-white); width: 32px; height: 32px; border-radius: 6px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: all 0.2s ease;
+}
+.cal-nav button:hover { background: rgba(255,255,255,0.12); }
+
+.cal-weekdays {
+    display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 12px;
+}
+.cal-weekdays span { text-align: center; font-size: 11px; color: var(--gray-light); font-family: var(--font-mono); letter-spacing: 0.5px; padding: 6px 0; }
+
+.cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+.cal-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; font-size: 13px; color: var(--gray-light);
+    cursor: pointer; transition: all 0.2s ease; position: relative; font-family: var(--font-sans);
+}
+.cal-day:hover { background: rgba(255,255,255,0.08); color: var(--signal-white); }
+.cal-day.today { color: var(--signal-white); font-weight: 600; }
+.cal-day.today::after {
+    content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%; background: var(--accent-blue);
+}
+.cal-day.selected {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #fff; font-weight: 600; box-shadow: 0 4px 16px rgba(0,102,255,0.35);
+}
+.cal-day.selected::after { display: none; }
+.cal-day.disabled { opacity: 0.25; cursor: default; }
+.cal-day.disabled:hover { background: none; }
+.cal-day.has-slot::before {
+    content: ''; position: absolute; top: 4px; right: 4px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent-green);
+}
+.cal-day.selected.has-slot::before { background: rgba(255,255,255,0.7); }
+
+/* Time slots */
+.time-section { margin-top: 28px; }
+.time-section-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gray-light); margin-bottom: 14px;
+}
+.time-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+.time-slot {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04); color: var(--gray-light); font-size: 13px;
+    cursor: pointer; transition: all 0.2s ease; font-family: var(--font-sans);
+}
+.time-slot:hover { border-color: rgba(255,255,255,0.3); color: var(--signal-white); background: rgba(255,255,255,0.08); }
+.time-slot.selected {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    border-color: transparent; color: #fff; box-shadow: 0 4px 14px rgba(0,102,255,0.3);
+}
+
+/* Duration */
+.duration-section { margin-top: 24px; }
+.duration-options { display: flex; gap: 8px; }
+.duration-btn {
+    padding: 7px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04); color: var(--gray-light); font-size: 12px;
+    cursor: pointer; transition: all 0.2s ease; font-family: var(--font-mono);
+}
+.duration-btn:hover { border-color: rgba(255,255,255,0.3); color: var(--signal-white); }
+.duration-btn.selected { background: rgba(139,92,246,0.15); border-color: var(--accent-purple); color: var(--accent-purple); }
+
+/* Right panel — form */
+.meeting-form-panel { background: #111; padding: 48px 40px; }
+.meeting-form-panel h3 { font-size: 20px; font-weight: 600; color: var(--signal-white); margin-bottom: 8px; }
+.meeting-form-panel > p { font-size: 13px; color: var(--gray-light); margin-bottom: 32px; line-height: 1.6; }
+
+.mf-group { margin-bottom: 24px; }
+.mf-label {
+    display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+    color: var(--gray-light); margin-bottom: 8px; text-transform: uppercase;
+}
+.mf-input, .mf-select, .mf-textarea {
+    width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 12px 16px; color: var(--signal-white);
+    font-family: var(--font-sans); font-size: 14px; transition: all 0.2s ease;
+    -webkit-appearance: none; appearance: none;
+}
+.mf-input:focus, .mf-select:focus, .mf-textarea:focus {
+    outline: none; border-color: var(--accent-blue); background: rgba(0,102,255,0.06);
+}
+.mf-select { background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+.mf-select option { background: #1a1a1a; color: var(--signal-white); }
+.mf-textarea { min-height: 100px; resize: vertical; }
+.mf-input::placeholder, .mf-textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+/* Summary bar */
+.meeting-summary {
+    margin: 28px 0; padding: 16px 18px; border-radius: 10px;
+    background: rgba(0,217,255,0.06); border: 1px solid rgba(0,217,255,0.15);
+    display: flex; flex-direction: column; gap: 6px;
+}
+.ms-row { display: flex; justify-content: space-between; font-size: 12px; }
+.ms-row .ms-k { color: var(--gray-light); font-family: var(--font-mono); letter-spacing: 0.5px; }
+.ms-row .ms-v { color: var(--accent-cyan); font-weight: 500; }
+
+.meeting-submit {
+    width: 100%; padding: 14px; border: none; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #fff; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s ease; position: relative; overflow: hidden;
+}
+.meeting-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,102,255,0.4); }
+.meeting-submit::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    transition: left 0.3s ease; z-index: 0;
+}
+.meeting-submit:hover::before { left: 0; }
+.meeting-submit span { position: relative; z-index: 1; }
+
+.success-msg {
+    display: none; text-align: center; padding: 40px 20px;
+}
+.success-msg .s-icon { font-size: 48px; margin-bottom: 16px; }
+.success-msg h4 { font-size: 20px; font-weight: 600; color: var(--signal-white); margin-bottom: 8px; }
+.success-msg p { font-size: 14px; color: var(--gray-light); line-height: 1.6; }
+
+/* ============ FOOTER ============ */
+footer { background: var(--void-black); color: var(--signal-white); padding: 80px 0 40px; border-top: 1px solid var(--gray-secondary); }
+.footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px; margin-bottom: 60px; }
+@media (max-width: 968px) { .footer-content { grid-template-columns: 1fr; gap: 40px; } }
+.footer-brand { font-family: var(--font-mono); font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+.footer-tagline { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+.footer-section h4 { font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--gray-light); }
+.footer-links { list-style: none; }
+.footer-links a { color: var(--signal-white); text-decoration: none; font-size: 14px; line-height: 2; transition: color 0.2s ease-out; }
+.footer-links a:hover { color: var(--gray-light); }
+.footer-bottom { padding-top: 40px; border-top: 1px solid var(--gray-secondary); display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-family: var(--font-mono); color: var(--gray-light); }
+@media (max-width: 768px) { .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } }
+
+/* Scroll Reveal */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Cursor glow */
+.cursor-glow {
+    position: fixed; width: 20px; height: 20px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,102,255,0.4) 0%, transparent 70%);
+    pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+    transition: width 0.2s ease, height 0.2s ease;
+}
+body:hover .cursor-glow { width: 40px; height: 40px; }
+    </style>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button>
+
+<nav id="mainNav">
+    <div class="scroll-progress"></div>
+    <div class="container">
+        <div class="logo">CERELYTIC</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#capabilities">CAPABILITIES</a></li>
+            <li><a href="#engine">THE ENGINE</a></li>
+            <li><a href="#roadmap">ROADMAP</a></li>
+            <li><a href="#manifesto">MANIFESTO</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-background"><canvas id="nodeCanvas"></canvas></div>
+    <div class="hero-badges">
+        <div class="hero-badge hero-badge-1"><div class="badge-dot" style="background:var(--accent-green)"></div><span>99.7% Accuracy Rate</span></div>
+        <div class="hero-badge hero-badge-2"><div class="badge-dot" style="background:var(--accent-blue)"></div><span>10M+ Records / Month</span></div>
+        <div class="hero-badge hero-badge-3"><div class="badge-dot" style="background:var(--accent-purple)"></div><span>24hr Deployment</span></div>
+        <div class="hero-badge hero-badge-4"><div class="badge-dot" style="background:var(--accent-cyan)"></div><span>Autonomous Intelligence</span></div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-subtitle">DEEP TECH FORGE</div>
+            <h1 class="hero-title">CERELYTIC</h1>
+            <p class="hero-description">Cerelytic is a deep-tech company building AI systems that automate complex decision-making across simulations, healthcare, and defense. It creates modular intelligence that integrates with enterprise systems to turn raw data into fair, actionable outcomes. The company focuses on precision, scalability, and long-term infrastructure rather than short-term software solutions. </p>
+            <a href="#capabilities" class="hero-cta"><span>EXPLORE CAPABILITIES</span><span>→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CAPABILITIES ===== -->
+<section id="capabilities">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">CORE DOMAINS</div>
+            <h2 class="section-title">Operational Capabilities</h2>
+        </div>
+        <div class="capabilities-grid reveal">
+            <!-- Card 1 -->
+            <div class="capability-card" onclick="openCapModal(0)">
+                <div class="capability-number">01</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="4" width="16" height="8"/><rect x="4" y="20" width="8" height="8"/><rect x="20" y="20" width="8" height="8"/>
+                        <line x1="16" y1="12" x2="16" y2="20"/><line x1="16" y1="20" x2="8" y2="20"/><line x1="16" y1="20" x2="24" y2="20"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">Fairness Automation</h3>
+                <p class="capability-description">Algorithmic auditors that scan datasets to identify and correct bias in real-time. The ethical core of our operational framework ensuring mathematical equity.</p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="40" stroke="#0066FF" stroke-width="2" opacity="0.3"/><circle cx="60" cy="60" r="30" stroke="#00D9FF" stroke-width="2" opacity="0.4"/><circle cx="60" cy="60" r="20" stroke="#8B5CF6" stroke-width="2" opacity="0.5"/><line x1="30" y1="60" x2="90" y2="60" stroke="#0066FF" stroke-width="3"/><circle cx="30" cy="60" r="4" fill="#0066FF"/><circle cx="90" cy="60" r="4" fill="#0066FF"/></svg>
+                </div>
+                <div class="click-hint">CLICK TO EXPLORE →</div>
+            </div>
+            <!-- Card 2 -->
+            <div class="capability-card" onclick="openCapModal(1)">
+                <div class="capability-number">02</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="16" cy="16" r="3"/><circle cx="8" cy="8" r="2"/><circle cx="24" cy="8" r="2"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/>
+                        <line x1="13" y1="16" x2="9.5" y2="9.5"/><line x1="19" y1="16" x2="22.5" y2="9.5"/><line x1="13" y1="16" x2="9.5" y2="22.5"/><line x1="19" y1="16" x2="22.5" y2="22.5"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">AI Automation</h3>
+                <p class="capability-description">End-to-end intelligent processing with autonomous agents that execute enterprise tasks without human intervention. Agentic workflows, not chatbots.</p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><circle cx="60" cy="60" r="8" fill="#8B5CF6" opacity="0.6"/><circle cx="30" cy="30" r="6" fill="#8B5CF6" opacity="0.4"/><circle cx="90" cy="30" r="6" fill="#0066FF" opacity="0.4"/><circle cx="30" cy="90" r="6" fill="#00D9FF" opacity="0.4"/><circle cx="90" cy="90" r="6" fill="#10B981" opacity="0.4"/><line x1="60" y1="60" x2="30" y2="30" stroke="#8B5CF6" stroke-width="2" opacity="0.3"/><line x1="60" y1="60" x2="90" y2="30" stroke="#0066FF" stroke-width="2" opacity="0.3"/><line x1="60" y1="60" x2="30" y2="90" stroke="#00D9FF" stroke-width="2" opacity="0.3"/><line x1="60" y1="60" x2="90" y2="90" stroke="#10B981" stroke-width="2" opacity="0.3"/></svg>
+                </div>
+                <div class="click-hint">CLICK TO EXPLORE →</div>
+            </div>
+            <!-- Card 3 -->
+            <div class="capability-card" onclick="openCapModal(2)">
+                <div class="capability-number">03</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 16 L16 4 L28 16 L16 28 Z"/><circle cx="16" cy="16" r="4"/>
+                    </svg>
+                </div>
+                <h3 class="capability-title">Game Development</h3>
+                <p class="capability-description">High-fidelity simulation engines for massive-scale logic stress-testing. Using Unreal and Unity to prove system resilience under extreme conditions.</p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none"><rect x="20" y="20" width="80" height="80" stroke="#FF6B35" stroke-width="2" opacity="0.3" rx="4"/><rect x="30" y="30" width="60" height="60" stroke="#FF6B35" stroke-width="2" opacity="0.4" rx="4"/><rect x="40" y="40" width="40" height="40" stroke="#8B5CF6" stroke-width="2" opacity="0.5" rx="4"/><circle cx="60" cy="60" r="10" fill="#FF6B35" opacity="0.4"/></svg>
+                </div>
+                <div class="click-hint">CLICK TO EXPLORE →</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CAPABILITY MODAL ===== -->
+<div class="modal-overlay" id="capModal" onclick="closeCapModal(event)">
+    <div class="modal-panel" onclick="event.stopPropagation()">
+        <div class="modal-header-bar" id="capModalBar"></div>
+        <button class="modal-close" onclick="closeCapModalBtn()">✕</button>
+        <div class="modal-body" id="capModalBody"></div>
+    </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item reveal"><div class="stat-number" data-target="99.7">0</div><div class="stat-label">Accuracy Rate</div><div class="stat-description">In bias detection algorithms</div></div>
+            <div class="stat-item reveal"><div class="stat-number" data-target="10">0</div><div class="stat-label">Million+ Records</div><div class="stat-description">Processed monthly</div></div>
+            <div class="stat-item reveal"><div class="stat-number" data-target="47">0</div><div class="stat-label">Reduction in Processing Time</div><div class="stat-description">Average across deployments</div></div>
+            <div class="stat-item reveal"><div class="stat-number" data-target="24">0</div><div class="stat-label">Hour Deployment</div><div class="stat-description">From integration to production</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CLC VERTICALS ===== -->
+<section class="clc-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">SPECIALIZED NODES</div>
+            <h2 class="section-title">CLC Verticals</h2>
+        </div>
+        <div class="clc-grid reveal">
+            <div class="clc-item" onclick="openClcModal(0)">
+                <div class="clc-bg-pattern">
+                    <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="#10B981" stroke-width="1" opacity="0.2"/><circle cx="100" cy="100" r="60" stroke="#00D9FF" stroke-width="1" opacity="0.2"/><circle cx="100" cy="100" r="40" stroke="#10B981" stroke-width="1" opacity="0.2"/><path d="M100 20 L100 180 M20 100 L180 100" stroke="#10B981" stroke-width="1" opacity="0.15"/></svg>
+                </div>
+                <div class="clc-label">CLC HEALTH</div>
+                <h3 class="clc-title">Bio-Data Billing</h3>
+                <p class="clc-description">Resolving the disconnect between patient care and financial reality. We automate the audit of medical coding to ensure fairness for patients and providers, eliminating administrative inefficiency at the intersection of healthcare and finance.</p>
+                <div class="clc-click-hint">CLICK FOR DEEP DIVE →</div>
+            </div>
+            <div class="clc-item" onclick="openClcModal(1)">
+                <div class="clc-bg-pattern">
+                    <svg viewBox="0 0 200 200" fill="none"><rect x="40" y="40" width="120" height="120" stroke="#0066FF" stroke-width="1" opacity="0.2"/><rect x="60" y="60" width="80" height="80" stroke="#8B5CF6" stroke-width="1" opacity="0.2"/><rect x="80" y="80" width="40" height="40" stroke="#0066FF" stroke-width="1" opacity="0.2"/><path d="M40 100 L160 100 M100 40 L100 160" stroke="#0066FF" stroke-width="1" opacity="0.15"/></svg>
+                </div>
+                <div class="clc-label">CLC DEFENCE</div>
+                <h3 class="clc-title">Security Logistics</h3>
+                <p class="clc-description">Predictive modeling for strategic resource allocation. Ensuring assets are deployed based on objective data, not administrative guessing. Intelligence-driven logistics for defense operations.</p>
+                <div class="clc-click-hint">CLICK FOR DEEP DIVE →</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CLC MODAL ===== -->
+<div class="modal-overlay" id="clcModal" onclick="closeClcModal(event)">
+    <div class="modal-panel" onclick="event.stopPropagation()">
+        <div class="modal-header-bar" id="clcModalBar"></div>
+        <button class="modal-close" onclick="closeClcModalBtn()">✕</button>
+        <div class="modal-body" id="clcModalBody"></div>
+    </div>
+</div>
+
+<!-- ===== ENGINE ===== -->
+<section id="engine" class="engine-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">TECHNICAL METHODOLOGY</div>
+            <h2 class="section-title">The Node Architecture</h2>
+        </div>
+        <div class="process-flow reveal">
+            <div class="flow-diagram">
+                <svg viewBox="0 0 1200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#0066FF"/><stop offset="100%" style="stop-color:#00D9FF"/></linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#00D9FF"/><stop offset="100%" style="stop-color:#8B5CF6"/></linearGradient>
+                        <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#8B5CF6"/><stop offset="100%" style="stop-color:#10B981"/></linearGradient>
+                        <marker id="arrowhead1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#00D9FF"/></marker>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#8B5CF6"/></marker>
+                        <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#10B981"/></marker>
+                    </defs>
+                    <rect x="50" y="60" width="200" height="80" stroke="url(#grad1)" stroke-width="2" fill="rgba(0,102,255,0.05)" rx="4"/>
+                    <text x="150" y="105" fill="#0066FF" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">INGESTION</text>
+                    <rect x="350" y="60" width="200" height="80" stroke="url(#grad2)" stroke-width="2" fill="rgba(0,217,255,0.05)" rx="4"/>
+                    <text x="450" y="105" fill="#8B5CF6" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">STRUCTURING</text>
+                    <rect x="650" y="60" width="200" height="80" stroke="url(#grad3)" stroke-width="2" fill="rgba(139,92,246,0.05)" rx="4"/>
+                    <text x="750" y="105" fill="#8B5CF6" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">FAIRNESS</text>
+                    <rect x="950" y="60" width="200" height="80" stroke="#10B981" stroke-width="2" fill="rgba(16,185,129,0.05)" rx="4"/>
+                    <text x="1050" y="105" fill="#10B981" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">EXECUTION</text>
+                    <path d="M 250 100 L 350 100" stroke="url(#grad1)" stroke-width="2" marker-end="url(#arrowhead1)"/>
+                    <path d="M 550 100 L 650 100" stroke="url(#grad2)" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <path d="M 850 100 L 950 100" stroke="url(#grad3)" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                </svg>
+            </div>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">PHASE 01</div><h3 class="step-title">Ingestion</h3><p class="step-description">Raw, unstructured data intake. Health records, financial logs, operational datasets absorbed without preprocessing requirements.</p><div class="process-connector"></div></div>
+                <div class="process-step"><div class="step-number">PHASE 02</div><h3 class="step-title">Structuring</h3><p class="step-description">AI agents convert chaos into structured formats. JSON, SQL, and semantic ontologies emerge from data entropy.</p><div class="process-connector"></div></div>
+                <div class="process-step"><div class="step-number">PHASE 03</div><h3 class="step-title">Fairness Filter</h3><p class="step-description">The Cerelytic Core checks for anomalies and bias. Mathematical auditing ensures ethical integrity of all outputs.</p><div class="process-connector"></div></div>
+                <div class="process-step"><div class="step-number">PHASE 04</div><h3 class="step-title">Execution</h3><p class="step-description">The system outputs decisions or actions. Autonomous execution without human bottlenecks.</p></div>
+            </div>
+            <div class="tech-visualization reveal">
+                <h3 class="tech-viz-title">Core Technology Stack</h3>
+                <div class="tech-viz-grid">
+                    <div class="tech-viz-card"><div class="tech-viz-icon"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="35" stroke="#0066FF" stroke-width="2"/><circle cx="50" cy="50" r="25" stroke="#00D9FF" stroke-width="2"/><circle cx="50" cy="50" r="15" stroke="#8B5CF6" stroke-width="2"/><line x1="50" y1="15" x2="50" y2="85" stroke="#0066FF" stroke-width="1"/><line x1="15" y1="50" x2="85" y2="50" stroke="#0066FF" stroke-width="1"/></svg></div><h4>Modular Architecture</h4><p>Independent nodes that integrate seamlessly with existing enterprise infrastructure</p></div>
+                    <div class="tech-viz-card"><div class="tech-viz-icon"><svg viewBox="0 0 100 100" fill="none"><path d="M20 80 L50 20 L80 80 Z" stroke="#10B981" stroke-width="2"/><path d="M30 70 L50 35 L70 70 Z" stroke="#00D9FF" stroke-width="2"/><circle cx="50" cy="50" r="8" fill="#8B5CF6"/></svg></div><h4>Real-Time Processing</h4><p>Millisecond latency for critical decision-making operations at enterprise scale</p></div>
+                    <div class="tech-viz-card"><div class="tech-viz-icon"><svg viewBox="0 0 100 100" fill="none"><rect x="15" y="15" width="70" height="70" stroke="#FF6B35" stroke-width="2" rx="4"/><rect x="25" y="25" width="50" height="50" stroke="#8B5CF6" stroke-width="2" rx="4"/><rect x="35" y="35" width="30" height="30" stroke="#0066FF" stroke-width="2" rx="4"/></svg></div><h4>Security First</h4><p>Military-grade encryption with zero-trust architecture for sensitive data operations</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ROADMAP ===== -->
+<section id="roadmap">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">STRATEGIC EVOLUTION</div>
+            <h2 class="section-title">Development Roadmap</h2>
+        </div>
+        <div class="roadmap-timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div><div class="timeline-version">V.1</div><div class="timeline-label">CURRENT STATE</div></div>
+                <div class="timeline-content">
+                    <h3>The Foundation</h3>
+                    <p>Establishing core AI auditing tools and operational frameworks.</p>
+                    <ul><li>Launching CLC Health pilot programs</li><li>Perfecting the Fairness Algorithm for financial sectors</li><li>Internal game simulation testing at scale</li></ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div><div class="timeline-version">V.2</div><div class="timeline-label">NEAR FUTURE</div></div>
+                <div class="timeline-content">
+                    <h3>Expansion & Interoperability</h3>
+                    <p>Scaling operations and opening integration pathways.</p>
+                    <ul><li>Opening the API for third-party developers</li><li>Deploying CLC Defence modules for logistics operations</li><li>Full automation of legal compliance checks</li></ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div><div class="timeline-version">V.3</div><div class="timeline-label">THE HORIZON</div></div>
+                <div class="timeline-content">
+                    <h3>The Operating System for Truth</h3>
+                    <p>Cerelytic becomes the standard background process for all major enterprise decisions, ensuring mathematical fairness globally.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MANIFESTO ===== -->
+<section id="manifesto" class="manifesto-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">PHILOSOPHY</div>
+            <h2 class="section-title">Our Manifesto</h2>
+        </div>
+        <div class="manifesto-content reveal">
+            <p class="manifesto-text"><strong>We exist to solve Systemic Friction.</strong> Whether in healthcare billing, defense logistics, or gaming simulations, complexity creates inefficiency. Cerelytic automates the resolution of this complexity.</p>
+            <div class="manifesto-quote">We don't build services. We forge the machinery that powers enterprise operations.</div>
+            <p class="manifesto-text">Traditional systems accumulate layers of human decision-making, each introducing latency and bias. Our approach eliminates these layers through <strong>algorithmic precision</strong> and <strong>autonomous intelligence</strong>.</p>
+            <p class="manifesto-text">The future belongs to organizations that operate on <strong>mathematical fairness</strong> rather than institutional inertia. Cerelytic is building that future, one node at a time.</p>
+            <div class="case-studies-visual">
+                <h3 class="case-studies-title">Proven Impact</h3>
+                <div class="case-studies-grid">
+                    <div class="case-study-card">
+                        <div class="case-study-image"><svg viewBox="0 0 300 200" fill="none"><defs><linearGradient id="caseGrad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0066FF;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.9"/></linearGradient></defs><rect width="300" height="200" fill="url(#caseGrad1)"/><circle cx="150" cy="100" r="60" stroke="white" stroke-width="2" opacity="0.3"/><circle cx="150" cy="100" r="40" stroke="white" stroke-width="2" opacity="0.5"/><circle cx="150" cy="100" r="20" stroke="white" stroke-width="2" opacity="0.7"/></svg></div>
+                        <div class="case-study-content"><h4>Healthcare Provider Network</h4><p>Reduced billing errors by 73% while processing 2M+ patient records monthly</p></div>
+                    </div>
+                    <div class="case-study-card">
+                        <div class="case-study-image"><svg viewBox="0 0 300 200" fill="none"><defs><linearGradient id="caseGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#0066FF;stop-opacity:0.9"/></linearGradient></defs><rect width="300" height="200" fill="url(#caseGrad2)"/><path d="M50 150 L100 100 L150 120 L200 60 L250 80" stroke="white" stroke-width="3" fill="none"/><circle cx="50" cy="150" r="6" fill="white"/><circle cx="100" cy="100" r="6" fill="white"/><circle cx="150" cy="120" r="6" fill="white"/><circle cx="200" cy="60" r="6" fill="white"/><circle cx="250" cy="80" r="6" fill="white"/></svg></div>
+                        <div class="case-study-content"><h4>Defense Logistics System</h4><p>Optimized resource allocation with 89% prediction accuracy across 500+ assets</p></div>
+                    </div>
+                    <div class="case-study-card">
+                        <div class="case-study-image"><svg viewBox="0 0 300 200" fill="none"><defs><linearGradient id="caseGrad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#10B981;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.9"/></linearGradient></defs><rect width="300" height="200" fill="url(#caseGrad3)"/><rect x="60" y="60" width="180" height="80" stroke="white" stroke-width="2" rx="4" opacity="0.4"/><rect x="80" y="80" width="140" height="40" stroke="white" stroke-width="2" rx="4" opacity="0.6"/><line x1="100" y1="100" x2="200" y2="100" stroke="white" stroke-width="2"/></svg></div>
+                        <div class="case-study-content"><h4>Simulation Testing Framework</h4><p>Stress-tested 10,000+ scenarios identifying 94% of edge cases before deployment</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT / MEETING ===== -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-header">
+            <div class="section-label">ESTABLISH CONNECTION</div>
+            <h2 class="section-title">Initialize Uplink</h2>
+            <p>Schedule a meeting with our team. Pick a date, choose your time, and we'll connect.</p>
+        </div>
+        <div class="meeting-wrapper">
+            <!-- Left: Calendar -->
+            <div class="meeting-calendar">
+                <div class="cal-header">
+                    <h3 id="calMonthYear">February 2026</h3>
+                    <div class="cal-nav">
+                        <button onclick="changeMonth(-1)">‹</button>
+                        <button onclick="changeMonth(1)">›</button>
+                    </div>
+                </div>
+                <div class="cal-weekdays">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="cal-days" id="calDays"></div>
+                <div class="time-section">
+                    <div class="time-section-label">Available Times</div>
+                    <div class="time-slots" id="timeSlots"></div>
+                </div>
+                <div class="duration-section">
+                    <div class="time-section-label">Duration</div>
+                    <div class="duration-options">
+                        <button class="duration-btn selected" onclick="setDuration(this,'15 min')">15 min</button>
+                        <button class="duration-btn" onclick="setDuration(this,'30 min')">30 min</button>
+                        <button class="duration-btn" onclick="setDuration(this,'60 min')">60 min</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Form -->
+            <div class="meeting-form-panel">
+                <div id="formContent">
+                    <h3>Your Details</h3>
+                    <p>Tell us about yourself and what you'd like to discuss.</p>
+                    <div class="mf-group"><label class="mf-label">Full Name</label><input type="text" class="mf-input" id="mfName" placeholder="John Doe"></div>
+                    <div class="mf-group"><label class="mf-label">Email Address</label><input type="email" class="mf-input" id="mfEmail" placeholder="john@company.com"></div>
+                    <div class="mf-group"><label class="mf-label">Organization</label><input type="text" class="mf-input" id="mfOrg" placeholder="Company Name"></div>
+                    <div class="mf-group">
+                        <label class="mf-label">Meeting Topic</label>
+                        <select class="mf-select" id="mfTopic">
+                            <option value="">Select a topic...</option>
+                            <option value="fairness">Fairness Automation</option>
+                            <option value="ai">AI Automation</option>
+                            <option value="game">Game Development</option>
+                            <option value="health">CLC Health</option>
+                            <option value="defence">CLC Defence</option>
+                            <option value="general">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="mf-group"><label class="mf-label">Additional Notes</label><textarea class="mf-textarea" id="mfNotes" placeholder="Tell us what you're looking to achieve..."></textarea></div>
+                    <div class="meeting-summary" id="meetingSummary">
+                        <div class="ms-row"><span class="ms-k">DATE</span><span class="ms-v" id="sumDate">—</span></div>
+                        <div class="ms-row"><span class="ms-k">TIME</span><span class="ms-v" id="sumTime">—</span></div>
+                        <div class="ms-row"><span class="ms-k">DURATION</span><span class="ms-v" id="sumDuration">15 min</span></div>
+                    </div>
+                    <button class="meeting-submit" onclick="submitMeeting()"><span>SCHEDULE MEETING</span></button>
+                </div>
+                <div class="success-msg" id="successMsg">
+                    <div class="s-icon">✓</div>
+                    <h4>Meeting Scheduled</h4>
+                    <p>A confirmation has been sent to your email. Our team will connect with you shortly to confirm the details.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div><div class="footer-brand">CERELYTIC</div><p class="footer-tagline">Deep Tech Forge. Building the machinery that powers enterprise operations through algorithmic precision and autonomous intelligence.</p></div>
+            <div class="footer-section"><h4>Navigation</h4><ul class="footer-links"><li><a href="#home">Home</a></li><li><a href="#capabilities">Capabilities</a></li><li><a href="#engine">The Engine</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#manifesto">Manifesto</a></li><li><a href="#contact">Contact</a></li></ul></div>
+            <div class="footer-section"><h4>Verticals</h4><ul class="footer-links"><li><a href="#capabilities">CLC Health</a></li><li><a href="#capabilities">CLC Defence</a></li><li><a href="#capabilities">AI Automation</a></li><li><a href="#capabilities">Game Development</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><div>© 2026 CERELYTIC. ALL RIGHTS RESERVED.</div><div>PROPRIETARY // CONFIDENTIAL</div></div>
+    </div>
+</footer>
+
+<script>
+// ===== MOBILE MENU =====
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.getElementById('navLinks');
+if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.addEventListener('click', () => { mobileMenuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
+    navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileMenuToggle.classList.remove('active'); navLinks.classList.remove('active'); }); });
+    document.addEventListener('click', (e) => { if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) { mobileMenuToggle.classList.remove('active'); navLinks.classList.remove('active'); } });
+}
+
+// ===== CANVAS NODE GRAPH =====
+const canvas = document.getElementById('nodeCanvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+const nodes = [];
+class Node {
+    constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vx = (Math.random()-0.5)*0.8; this.vy = (Math.random()-0.5)*0.8; this.radius = Math.random()*3+1; this.color = ['#0066FF','#8B5CF6','#00D9FF','#10B981'][Math.floor(Math.random()*4)]; }
+    update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width) this.vx*=-1; if(this.y<0||this.y>canvas.height) this.vy*=-1; }
+    draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.radius,0,Math.PI*2); ctx.fillStyle=this.color; ctx.globalAlpha=0.6; ctx.fill(); ctx.globalAlpha=1; }
+}
+for(let i=0;i<80;i++) nodes.push(new Node());
+function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++) { const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.sqrt(dx*dx+dy*dy); if(d<200){ ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); const g=ctx.createLinearGradient(nodes[i].x,nodes[i].y,nodes[j].x,nodes[j].y); g.addColorStop(0,nodes[i].color); g.addColorStop(1,nodes[j].color); ctx.strokeStyle=g; ctx.globalAlpha=(1-d/200)*0.3; ctx.lineWidth=1.5; ctx.stroke(); ctx.globalAlpha=1; } }
+    nodes.forEach(n=>{n.update();n.draw();}); requestAnimationFrame(animate);
+}
+animate();
+
+// ===== SCROLL REVEAL =====
+function revealOnScroll() {
+    const wh = window.innerHeight;
+    document.querySelectorAll('.reveal').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('active'); });
+    document.querySelectorAll('.capability-card').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.clc-item').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.process-step').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.stat-item').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.tech-viz-card').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.case-study-card').forEach(el => { if(el.getBoundingClientRect().top < wh-100) el.classList.add('animate-in'); });
+    document.querySelectorAll('.timeline-item').forEach((el,i) => { if(el.getBoundingClientRect().top < wh-100) setTimeout(()=>el.classList.add('animate-in'),i*200); });
+}
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+// ===== SCROLL PROGRESS =====
+window.addEventListener('scroll', () => { const sp=document.querySelector('.scroll-progress'); const st=window.pageYOffset; const dh=document.documentElement.scrollHeight-document.documentElement.clientHeight; sp.style.width=(st/dh)*100+'%'; });
+
+// ===== ANIMATED COUNTERS =====
+let hasAnimated = false;
+function animateCounters() {
+    if(hasAnimated) return;
+    const ss = document.querySelector('.stats-section');
+    if(ss.getBoundingClientRect().top < window.innerHeight-100) {
+        hasAnimated=true;
+        document.querySelectorAll('.stat-number').forEach(counter => {
+            const target=parseFloat(counter.getAttribute('data-target')); const duration=2000; const step=target/(duration/16); let current=0;
+            const update=()=>{ current+=step; if(current<target){counter.textContent=Math.floor(current);requestAnimationFrame(update);}else{counter.textContent=target%1===0?target:target.toFixed(1);} };
+            update();
+        });
+    }
+}
+window.addEventListener('scroll', animateCounters);
+animateCounters();
+
+// ===== PARALLAX =====
+window.addEventListener('scroll', () => { const s=window.pageYOffset; const hb=document.querySelector('.hero-background'); if(hb) hb.style.transform=`translateY(${s*0.5}px)`; });
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function(e){ e.preventDefault(); const t=document.querySelector(this.getAttribute('href')); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); }); });
+
+// ===== CURSOR GLOW =====
+const cursorGlow = document.getElementById('cursorGlow');
+if(cursorGlow && window.innerWidth>=768) { document.addEventListener('mousemove', e=>{ cursorGlow.style.left=e.clientX+'px'; cursorGlow.style.top=e.clientY+'px'; }); } else if(cursorGlow) cursorGlow.style.display='none';
+
+// ===== CAPABILITY MODAL DATA =====
+const capData = [
+    {
+        bar: 'blue', number: '01', title: 'Fairness Automation',
+        desc: 'Our Fairness Automation engine is the ethical backbone of every Cerelytic deployment. It operates as a continuous, real-time auditor layer that sits between raw data and final output — scanning, evaluating, and correcting bias before it ever reaches a decision point.',
+        features: [
+            { icon: 'blue', symbol: '⟳', title: 'Real-Time Bias Detection', text: 'Continuous scanning of incoming data streams to flag statistical anomalies and demographic disparities before they propagate through the system.' },
+            { icon: 'cyan', symbol: '✓', title: 'Mathematical Equity Scoring', text: 'Every dataset receives an equity score based on multi-dimensional fairness metrics including equal opportunity, demographic parity, and calibration.' },
+            { icon: 'purple', symbol: '⚡', title: 'Automated Correction Loops', text: 'When bias is detected, the system automatically applies calibrated corrections without human intervention, maintaining throughput and integrity.' },
+            { icon: 'green', symbol: '📋', title: 'Compliance Audit Trail', text: 'Full transparency logging of every fairness check, correction applied, and decision rationale — ready for regulatory review at any time.' }
+        ],
+        stats: [{ val: '99.7%', label: 'Detection Accuracy' }, { val: '<2ms', label: 'Latency' }, { val: '24/7', label: 'Monitoring' }]
+    },
+    {
+        bar: 'purple', number: '02', title: 'AI Automation',
+        desc: 'Cerelytic\'s AI Automation platform replaces traditional workflow orchestration with fully autonomous agent networks. These aren\'t chatbots or rule-based scripts — they are intelligent agents that understand context, adapt to exceptions, and execute complex multi-step enterprise tasks end-to-end.',
+        features: [
+            { icon: 'purple', symbol: '🤖', title: 'Autonomous Agent Orchestration', text: 'Deploy networks of AI agents that collaborate, delegate sub-tasks, and self-correct — handling enterprise workflows with zero human intervention.' },
+            { icon: 'blue', symbol: '🔄', title: 'Adaptive Workflow Execution', text: 'Agents learn from past executions and dynamically adjust their approach when encountering novel situations or edge cases in live operations.' },
+            { icon: 'green', symbol: '📊', title: 'End-to-End Process Intelligence', text: 'Full visibility into every agent action, decision point, and outcome — giving enterprises complete operational transparency.' },
+            { icon: 'orange', symbol: '🛡️', title: 'Guardrailed Autonomy', text: 'Every autonomous action is bounded by configurable safety rails ensuring agents operate within defined parameters and escalate when appropriate.' }
+        ],
+        stats: [{ val: '10M+', label: 'Records/Month' }, { val: '47%', label: 'Faster Processing' }, { val: '∞', label: 'Scalability' }]
+    },
+    {
+        bar: 'orange', number: '03', title: 'Game Development',
+        desc: 'Cerelytic\'s Game Development vertical harnesses the raw power of Unreal Engine and Unity to build high-fidelity simulation environments. These aren\'t games for entertainment — they are precision stress-testing arenas that push enterprise systems to their absolute limits under simulated real-world chaos.',
+        features: [
+            { icon: 'orange', symbol: '🎮', title: 'Massive-Scale Simulation', text: 'Build immersive simulation environments capable of modeling millions of interacting variables — replicating real-world complexity at unprecedented fidelity.' },
+            { icon: 'purple', symbol: '💥', title: 'Extreme Condition Testing', text: 'Subject systems to catastrophic scenarios — network failures, data corruption, adversarial attacks — all within a controlled simulation framework.' },
+            { icon: 'blue', symbol: '📈', title: 'Edge Case Discovery', text: 'AI-driven scenario generation automatically identifies and tests the most obscure edge cases that manual testing would never uncover.' },
+            { icon: 'green', symbol: '✅', title: 'Production Readiness Certification', text: 'Systems pass through rigorous simulation gauntlets before deployment, ensuring they can handle any real-world condition with confidence.' }
+        ],
+        stats: [{ val: '10K+', label: 'Scenarios Tested' }, { val: '94%', label: 'Edge Case Coverage' }, { val: '24hr', label: 'Sim-to-Deploy' }]
+    }
+];
+
+function openCapModal(idx) {
+    const d = capData[idx];
+    document.getElementById('capModalBar').className = 'modal-header-bar ' + d.bar;
+    let html = `<div class="modal-number">${d.number}</div><div class="modal-title">${d.title}</div><div class="modal-desc">${d.desc}</div><ul class="modal-features">`;
+    d.features.forEach(f => { html += `<li><div class="feat-icon ${f.icon}">${f.symbol}</div><div><strong style="color:#000;font-size:15px;">${f.title}</strong><br>${f.text}</div></li>`; });
+    html += '</ul><div class="modal-stat-row">';
+    d.stats.forEach(s => { html += `<div class="modal-stat"><div class="ms-val">${s.val}</div><div class="ms-label">${s.label}</div></div>`; });
+    html += '</div>';
+    document.getElementById('capModalBody').innerHTML = html;
+    document.getElementById('capModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeCapModal(e) { if(e.target===document.getElementById('capModal')){ closeCapModalBtn(); } }
+function closeCapModalBtn() { document.getElementById('capModal').classList.remove('active'); document.body.style.overflow=''; }
+
+// ===== CLC MODAL DATA =====
+const clcData = [
+    {
+        bar: 'blue', label: 'CLC HEALTH', title: 'Bio-Data Billing',
+        desc: 'The healthcare billing crisis costs the industry billions annually in errors, fraud, and administrative overhead. CLC Health is Cerelytic\'s specialized vertical that automates the entire medical coding and billing audit pipeline — from claim submission to payment reconciliation.',
+        features: [
+            { icon: 'green', symbol: '🏥', title: 'Automated Medical Coding Audit', text: 'AI agents cross-reference every medical code (ICD-10, CPT, HCPCS) against clinical documentation to flag incorrect, missing, or potentially fraudulent codes in real-time.' },
+            { icon: 'blue', symbol: '💰', title: 'Patient Fairness Verification', text: 'Every bill is passed through the Fairness Engine to ensure patients are not overcharged or discriminated against based on demographic or socioeconomic factors.' },
+            { icon: 'cyan', symbol: '⚡', title: 'Claim-to-Payment Optimization', text: 'Reduces claim denial rates by pre-screening submissions against payer requirements, dramatically accelerating the revenue cycle for healthcare providers.' },
+            { icon: 'purple', symbol: '📊', title: 'Predictive Analytics Dashboard', text: 'Real-time dashboards surface billing trends, denial patterns, and revenue forecasting — giving administrators actionable intelligence at a glance.' }
+        ],
+        stats: [{ val: '73%', label: 'Error Reduction' }, { val: '2M+', label: 'Records/Month' }, { val: '$4.2M', label: 'Avg. Savings' }]
+    },
+    {
+        bar: 'purple', label: 'CLC DEFENCE', title: 'Security Logistics',
+        desc: 'Defense logistics is a battlefield of complexity — assets must be deployed with precision, supply chains must be unbroken, and decisions must be made faster than adversaries can react. CLC Defence applies Cerelytic\'s autonomous intelligence to transform resource allocation from guesswork into data-driven certainty.',
+        features: [
+            { icon: 'blue', symbol: '🎯', title: 'Predictive Resource Allocation', text: 'Machine learning models analyze historical patterns, real-time telemetry, and threat intelligence to predict optimal asset deployment before commanders make requests.' },
+            { icon: 'purple', symbol: '🛡️', title: 'Supply Chain Resilience', text: 'Continuous monitoring of supply chain vulnerabilities with automated rerouting when disruptions are detected — ensuring zero critical supply failures.' },
+            { icon: 'orange', symbol: '⚡', title: 'Real-Time Decision Support', text: 'Autonomous agents process incoming intelligence and present commanders with ranked action recommendations, each backed by confidence scores and risk analysis.' },
+            { icon: 'green', symbol: '📍', title: 'Asset Tracking & Optimization', text: 'Full situational awareness of all deployed assets with AI-driven movement optimization that minimizes cost, maximizes coverage, and reduces exposure.' }
+        ],
+        stats: [{ val: '89%', label: 'Prediction Accuracy' }, { val: '500+', label: 'Assets Tracked' }, { val: '3x', label: 'Faster Decisions' }]
+    }
+];
+
+function openClcModal(idx) {
+    const d = clcData[idx];
+    document.getElementById('clcModalBar').className = 'modal-header-bar ' + d.bar;
+    let html = `<div class="modal-number" style="font-family:var(--font-mono);font-size:11px;color:var(--gray-light);letter-spacing:1px;margin-bottom:8px;"><span style="display:inline-block;padding:4px 12px;border-radius:3px;background:${d.bar==='blue'?'linear-gradient(135deg,var(--accent-blue),var(--accent-purple))':'linear-gradient(135deg,var(--accent-green),var(--accent-cyan))'};color:#fff;font-size:10px;letter-spacing:1.5px;">${d.label}</span></div><div class="modal-title">${d.title}</div><div class="modal-desc">${d.desc}</div><ul class="modal-features">`;
+    d.features.forEach(f => { html += `<li><div class="feat-icon ${f.icon}">${f.symbol}</div><div><strong style="color:#000;font-size:15px;">${f.title}</strong><br>${f.text}</div></li>`; });
+    html += '</ul><div class="modal-stat-row">';
+    d.stats.forEach(s => { html += `<div class="modal-stat"><div class="ms-val">${s.val}</div><div class="ms-label">${s.label}</div></div>`; });
+    html += '</div>';
+    document.getElementById('clcModalBody').innerHTML = html;
+    document.getElementById('clcModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeClcModal(e) { if(e.target===document.getElementById('clcModal')) closeClcModalBtn(); }
+function closeClcModalBtn() { document.getElementById('clcModal').classList.remove('active'); document.body.style.overflow=''; }
+
+// ===== MEETING CALENDAR =====
+let currentMonth = 1; // Feb (0-indexed)
+let currentYear = 2026;
+let selectedDate = null;
+let selectedTime = null;
+let selectedDuration = '15 min';
+
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// Days that have available slots (simulate availability)
+function hasAvailability(day, month, year) {
+    // Weekdays only, and not past dates if current month
+    const d = new Date(year, month, day);
+    if(d.getDay()===0||d.getDay()===6) return false;
+    if(month===1&&year===2026&&day<1) return false;
+    return true;
+}
+
+function renderCalendar() {
+    document.getElementById('calMonthYear').textContent = months[currentMonth]+' '+currentYear;
+    const container = document.getElementById('calDays');
+    container.innerHTML = '';
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
+    // Blanks
+    for(let i=0;i<firstDay;i++) { const b=document.createElement('div'); b.className='cal-day disabled'; container.appendChild(b); }
+    for(let d=1;d<=daysInMonth;d++) {
+        const div = document.createElement('div');
+        let cls = 'cal-day';
+        const isToday = (d===1 && currentMonth===1 && currentYear===2026);
+        const isPast = (currentMonth===1 && currentYear===2026 && d<1);
+        const avail = hasAvailability(d, currentMonth, currentYear);
+        if(isPast) cls+=' disabled';
+        else if(avail) cls+=' has-slot';
+        if(isToday) cls+=' today';
+        if(selectedDate && selectedDate.day===d && selectedDate.month===currentMonth && selectedDate.year===currentYear) cls+=' selected';
+        div.className = cls;
+        div.textContent = d;
+        if(!isPast && avail) div.onclick = () => selectDate(d);
+        container.appendChild(div);
+    }
+}
+
+function selectDate(day) {
+    selectedDate = { day, month: currentMonth, year: currentYear };
+    renderCalendar();
+    renderTimeSlots();
+    updateSummary();
+}
+
+function renderTimeSlots() {
+    const container = document.getElementById('timeSlots');
+    container.innerHTML = '';
+    const times = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM'];
+    times.forEach(t => {
+        const btn = document.createElement('div');
+        btn.className = 'time-slot' + (selectedTime===t?' selected':'');
+        btn.textContent = t;
+        btn.onclick = () => { selectedTime=t; renderTimeSlots(); updateSummary(); };
+        container.appendChild(btn);
+    });
+}
+
+function setDuration(btn, dur) {
+    selectedDuration = dur;
+    document.querySelectorAll('.duration-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('sumDuration').textContent = dur;
+}
+
+function changeMonth(dir) {
+    currentMonth += dir;
+    if(currentMonth<0){ currentMonth=11; currentYear--; }
+    if(currentMonth>11){ currentMonth=0; currentYear++; }
+    renderCalendar();
+}
+
+function updateSummary() {
+    if(selectedDate) document.getElementById('sumDate').textContent = months[selectedDate.month].substring(0,3)+' '+selectedDate.day+', '+selectedDate.year;
+    else document.getElementById('sumDate').textContent = '—';
+    document.getElementById('sumTime').textContent = selectedTime || '—';
+    document.getElementById('sumDuration').textContent = selectedDuration;
+}
+
+function submitMeeting() {
+    const name = document.getElementById('mfName').value.trim();
+    const email = document.getElementById('mfEmail').value.trim();
+    if(!name||!email) { alert('Please fill in your name and email.'); return; }
+    if(!selectedDate||!selectedTime) { alert('Please select a date and time.'); return; }
+    // Show success
+    document.getElementById('formContent').style.display='none';
+    document.getElementById('successMsg').style.display='block';
+}
+
+// Init
+renderCalendar();
+renderTimeSlots();
+</script>
+</body>
+</html>

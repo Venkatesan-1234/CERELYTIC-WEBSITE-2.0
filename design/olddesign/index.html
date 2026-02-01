@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CERELYTIC — Deep Tech Forge</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <nav id="mainNav">
+        <div class="scroll-progress"></div>
+        <div class="container">
+            <div class="logo">CERELYTIC</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#capabilities">CAPABILITIES</a></li>
+                <li><a href="#engine">THE ENGINE</a></li>
+                <li><a href="#roadmap">ROADMAP</a></li>
+                <li><a href="#manifesto">MANIFESTO</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section (Hero) -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <canvas id="nodeCanvas" class="node-graph"></canvas>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle">DEEP TECH FORGE</div>
+                <h1 class="hero-title">CERELYTIC</h1>
+                <p class="hero-description">
+                    Cerelytic is a deep-tech company that builds AI-driven systems to automate complex, data-heavy processes. It works across fields such as large-scale simulations, healthcare automation, defense logistics, and algorithmic fairness. Cerelytic designs modular intelligence that integrates into existing enterprise systems, turning raw data into unbiased, actionable decisions. Its focus is on precision, scalability, and ethical automation rather than traditional software services. 
+                </p>
+                <a href="#capabilities" class="hero-cta">
+                    <span>EXPLORE CAPABILITIES</span>
+                    <span>→</span>
+                </a>
+                
+                <div class="hero-decorative-images">
+                    <div class="hero-image-item hero-image-1">
+                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="20" width="160" height="160" stroke="url(#heroGrad1)" stroke-width="2" rx="8" opacity="0.6"/>
+                            <rect x="40" y="40" width="120" height="120" stroke="url(#heroGrad2)" stroke-width="2" rx="8" opacity="0.5"/>
+                            <circle cx="100" cy="100" r="30" stroke="url(#heroGrad3)" stroke-width="2" opacity="0.4"/>
+                            <defs>
+                                <linearGradient id="heroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="heroGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0066FF;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="heroGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="hero-image-item hero-image-2">
+                        <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M75 15 L135 75 L75 135 L15 75 Z" stroke="#8B5CF6" stroke-width="2" opacity="0.4"/>
+                            <circle cx="75" cy="75" r="40" stroke="#0066FF" stroke-width="2" opacity="0.3"/>
+                            <circle cx="75" cy="75" r="20" stroke="#00D9FF" stroke-width="2" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="hero-image-item hero-image-3">
+                        <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="90,20 160,70 140,150 40,150 20,70" stroke="#FF6B35" stroke-width="2" opacity="0.4"/>
+                            <polygon points="90,50 130,80 115,130 65,130 50,80" stroke="#8B5CF6" stroke-width="2" opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities Section -->
+<section id="capabilities">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">CORE DOMAINS</div>
+            <h2 class="section-title">Operational Capabilities</h2>
+        </div>
+
+        <div class="capabilities-grid reveal">
+            <div class="capability-card">
+                <div class="capability-number">01</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="4" width="16" height="8" />
+                        <rect x="4" y="20" width="8" height="8" />
+                        <rect x="20" y="20" width="8" height="8" />
+                        <line x1="16" y1="12" x2="16" y2="20" />
+                        <line x1="16" y1="20" x2="8" y2="20" />
+                        <line x1="16" y1="20" x2="24" y2="20" />
+                    </svg>
+                </div>
+                <h3 class="capability-title">Fairness Automation</h3>
+                <p class="capability-description">
+                    Algorithmic auditors that scan datasets to identify and correct bias in real-time. 
+                    The ethical core of our operational framework ensuring mathematical equity.
+                </p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="40" stroke="#0066FF" stroke-width="2" opacity="0.3"/>
+                        <circle cx="60" cy="60" r="30" stroke="#00D9FF" stroke-width="2" opacity="0.4"/>
+                        <circle cx="60" cy="60" r="20" stroke="#8B5CF6" stroke-width="2" opacity="0.5"/>
+                        <line x1="30" y1="60" x2="90" y2="60" stroke="#0066FF" stroke-width="3"/>
+                        <circle cx="30" cy="60" r="4" fill="#0066FF"/>
+                        <circle cx="90" cy="60" r="4" fill="#0066FF"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-number">02</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="16" cy="16" r="3" />
+                        <circle cx="8" cy="8" r="2" />
+                        <circle cx="24" cy="8" r="2" />
+                        <circle cx="8" cy="24" r="2" />
+                        <circle cx="24" cy="24" r="2" />
+                        <line x1="13" y1="16" x2="9.5" y2="9.5" />
+                        <line x1="19" y1="16" x2="22.5" y2="9.5" />
+                        <line x1="13" y1="16" x2="9.5" y2="22.5" />
+                        <line x1="19" y1="16" x2="22.5" y2="22.5" />
+                    </svg>
+                </div>
+                <h3 class="capability-title">AI Automation</h3>
+                <p class="capability-description">
+                    End-to-end intelligent processing with autonomous agents that execute enterprise 
+                    tasks without human intervention. Agentic workflows, not chatbots.
+                </p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="8" fill="#8B5CF6" opacity="0.6"/>
+                        <circle cx="30" cy="30" r="6" fill="#8B5CF6" opacity="0.4"/>
+                        <circle cx="90" cy="30" r="6" fill="#0066FF" opacity="0.4"/>
+                        <circle cx="30" cy="90" r="6" fill="#00D9FF" opacity="0.4"/>
+                        <circle cx="90" cy="90" r="6" fill="#10B981" opacity="0.4"/>
+                        <line x1="60" y1="60" x2="30" y2="30" stroke="#8B5CF6" stroke-width="2" opacity="0.3"/>
+                        <line x1="60" y1="60" x2="90" y2="30" stroke="#0066FF" stroke-width="2" opacity="0.3"/>
+                        <line x1="60" y1="60" x2="30" y2="90" stroke="#00D9FF" stroke-width="2" opacity="0.3"/>
+                        <line x1="60" y1="60" x2="90" y2="90" stroke="#10B981" stroke-width="2" opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-number">03</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 16 L16 4 L28 16 L16 28 Z" />
+                        <circle cx="16" cy="16" r="4" />
+                    </svg>
+                </div>
+                <h3 class="capability-title">Game Development</h3>
+                <p class="capability-description">
+                    High-fidelity simulation engines for massive-scale logic stress-testing. 
+                    Using Unreal and Unity to prove system resilience under extreme conditions.
+                </p>
+                <div class="capability-visual">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="80" height="80" stroke="#FF6B35" stroke-width="2" opacity="0.3" rx="4"/>
+                        <rect x="30" y="30" width="60" height="60" stroke="#FF6B35" stroke-width="2" opacity="0.4" rx="4"/>
+                        <rect x="40" y="40" width="40" height="40" stroke="#8B5CF6" stroke-width="2" opacity="0.5" rx="4"/>
+                        <circle cx="60" cy="60" r="10" fill="#FF6B35" opacity="0.4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="99.7">0</div>
+                    <div class="stat-label">Accuracy Rate</div>
+                    <div class="stat-description">In bias detection algorithms</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">Million+ Records</div>
+                    <div class="stat-description">Processed monthly</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="47">0</div>
+                    <div class="stat-label">Reduction in Processing Time</div>
+                    <div class="stat-description">Average across deployments</div>
+                </div>
+                <div class="stat-item reveal">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Hour Deployment</div>
+                    <div class="stat-description">From integration to production</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLC Verticals Section -->
+    <section class="clc-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">SPECIALIZED NODES</div>
+                <h2 class="section-title">CLC Verticals</h2>
+            </div>
+
+            <div class="clc-grid reveal">
+                <div class="clc-item">
+                    <div class="clc-bg-pattern">
+                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="80" stroke="#10B981" stroke-width="1" opacity="0.2"/>
+                            <circle cx="100" cy="100" r="60" stroke="#00D9FF" stroke-width="1" opacity="0.2"/>
+                            <circle cx="100" cy="100" r="40" stroke="#10B981" stroke-width="1" opacity="0.2"/>
+                            <path d="M100 20 L100 180 M20 100 L180 100" stroke="#10B981" stroke-width="1" opacity="0.15"/>
+                        </svg>
+                    </div>
+                    <div class="clc-label">CLC HEALTH</div>
+                    <h3 class="clc-title">Bio-Data Billing</h3>
+                    <p class="clc-description">
+                        Resolving the disconnect between patient care and financial reality. 
+                        We automate the audit of medical coding to ensure fairness for patients 
+                        and providers, eliminating administrative inefficiency at the intersection 
+                        of healthcare and finance.
+                    </p>
+                </div>
+
+                <div class="clc-item">
+                    <div class="clc-bg-pattern">
+                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="40" y="40" width="120" height="120" stroke="#0066FF" stroke-width="1" opacity="0.2"/>
+                            <rect x="60" y="60" width="80" height="80" stroke="#8B5CF6" stroke-width="1" opacity="0.2"/>
+                            <rect x="80" y="80" width="40" height="40" stroke="#0066FF" stroke-width="1" opacity="0.2"/>
+                            <path d="M40 100 L160 100 M100 40 L100 160" stroke="#0066FF" stroke-width="1" opacity="0.15"/>
+                        </svg>
+                    </div>
+                    <div class="clc-label">CLC DEFENCE</div>
+                    <h3 class="clc-title">Security Logistics</h3>
+                    <p class="clc-description">
+                        Predictive modeling for strategic resource allocation. Ensuring assets 
+                        are deployed based on objective data, not administrative guessing. 
+                        Intelligence-driven logistics for defense operations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engine Section -->
+<section id="engine" class="engine-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">TECHNICAL METHODOLOGY</div>
+            <h2 class="section-title">The Node Architecture</h2>
+        </div>
+
+        <div class="process-flow reveal">
+            <div class="flow-diagram">
+                <svg viewBox="0 0 1200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <rect x="50" y="60" width="200" height="80" stroke="url(#grad1)" stroke-width="2" fill="rgba(0,102,255,0.05)" rx="4"/>
+                    <text x="150" y="105" fill="#0066FF" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">INGESTION</text>
+
+                    <rect x="350" y="60" width="200" height="80" stroke="url(#grad2)" stroke-width="2" fill="rgba(0,217,255,0.05)" rx="4"/>
+                    <text x="450" y="105" fill="#8B5CF6" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">STRUCTURING</text>
+
+                    <rect x="650" y="60" width="200" height="80" stroke="url(#grad3)" stroke-width="2" fill="rgba(139,92,246,0.05)" rx="4"/>
+                    <text x="750" y="105" fill="#8B5CF6" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">FAIRNESS</text>
+
+                    <rect x="950" y="60" width="200" height="80" stroke="#10B981" stroke-width="2" fill="rgba(16,185,129,0.05)" rx="4"/>
+                    <text x="1050" y="105" fill="#10B981" font-family="monospace" font-size="14" text-anchor="middle" font-weight="bold">EXECUTION</text>
+                    
+                    <path d="M 250 100 L 350 100" stroke="url(#grad1)" stroke-width="2" marker-end="url(#arrowhead1)"/>
+                    <path d="M 550 100 L 650 100" stroke="url(#grad2)" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <path d="M 850 100 L 950 100" stroke="url(#grad3)" stroke-width="2" marker-end="url(#arrowhead3)"/>
+                    
+                    <defs>
+                        <marker id="arrowhead1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#00D9FF" />
+                        </marker>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#8B5CF6" />
+                        </marker>
+                        <marker id="arrowhead3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#10B981" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">PHASE 01</div>
+                    <h3 class="step-title">Ingestion</h3>
+                    <p class="step-description">
+                        Raw, unstructured data intake. Health records, financial logs, 
+                        operational datasets absorbed without preprocessing requirements.
+                    </p>
+                    <div class="process-connector"></div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">PHASE 02</div>
+                    <h3 class="step-title">Structuring</h3>
+                    <p class="step-description">
+                        AI agents convert chaos into structured formats. JSON, SQL, 
+                        and semantic ontologies emerge from data entropy.
+                    </p>
+                    <div class="process-connector"></div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">PHASE 03</div>
+                    <h3 class="step-title">Fairness Filter</h3>
+                    <p class="step-description">
+                        The Cerelytic Core checks for anomalies and bias. Mathematical 
+                        auditing ensures ethical integrity of all outputs.
+                    </p>
+                    <div class="process-connector"></div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">PHASE 04</div>
+                    <h3 class="step-title">Execution</h3>
+                    <p class="step-description">
+                        The system outputs decisions or actions. Autonomous execution 
+                        without human bottlenecks.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tech-visualization reveal">
+                <h3 class="tech-viz-title">Core Technology Stack</h3>
+                <div class="tech-viz-grid">
+                    <div class="tech-viz-card">
+                        <div class="tech-viz-icon">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="35" stroke="#0066FF" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="25" stroke="#00D9FF" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="15" stroke="#8B5CF6" stroke-width="2"/>
+                                <line x1="50" y1="15" x2="50" y2="85" stroke="#0066FF" stroke-width="1"/>
+                                <line x1="15" y1="50" x2="85" y2="50" stroke="#0066FF" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <h4>Modular Architecture</h4>
+                        <p>Independent nodes that integrate seamlessly with existing enterprise infrastructure</p>
+                    </div>
+
+                    <div class="tech-viz-card">
+                        <div class="tech-viz-icon">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 80 L50 20 L80 80 Z" stroke="#10B981" stroke-width="2"/>
+                                <path d="M30 70 L50 35 L70 70 Z" stroke="#00D9FF" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="8" fill="#8B5CF6"/>
+                            </svg>
+                        </div>
+                        <h4>Real-Time Processing</h4>
+                        <p>Millisecond latency for critical decision-making operations at enterprise scale</p>
+                    </div>
+
+                    <div class="tech-viz-card">
+                        <div class="tech-viz-icon">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="15" y="15" width="70" height="70" stroke="#FF6B35" stroke-width="2" rx="4"/>
+                                <rect x="25" y="25" width="50" height="50" stroke="#8B5CF6" stroke-width="2" rx="4"/>
+                                <rect x="35" y="35" width="30" height="30" stroke="#0066FF" stroke-width="2" rx="4"/>
+                            </svg>
+                        </div>
+                        <h4>Security First</h4>
+                        <p>Military-grade encryption with zero-trust architecture for sensitive data operations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Roadmap Section -->
+<section id="roadmap">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">STRATEGIC EVOLUTION</div>
+            <h2 class="section-title">Development Roadmap</h2>
+        </div>
+
+        <div class="roadmap-timeline">
+            <div class="timeline-item reveal">
+                <div>
+                    <div class="timeline-version">V.1</div>
+                    <div class="timeline-label">CURRENT STATE</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>The Foundation</h3>
+                    <p>Establishing core AI auditing tools and operational frameworks.</p>
+                    <ul>
+                        <li>Launching CLC Health pilot programs</li>
+                        <li>Perfecting the Fairness Algorithm for financial sectors</li>
+                        <li>Internal game simulation testing at scale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div>
+                    <div class="timeline-version">V.2</div>
+                    <div class="timeline-label">NEAR FUTURE</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>Expansion & Interoperability</h3>
+                    <p>Scaling operations and opening integration pathways.</p>
+                    <ul>
+                        <li>Opening the API for third-party developers</li>
+                        <li>Deploying CLC Defence modules for logistics operations</li>
+                        <li>Full automation of legal compliance checks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div>
+                    <div class="timeline-version">V.3</div>
+                    <div class="timeline-label">THE HORIZON</div>
+                </div>
+                <div class="timeline-content">
+                    <h3>The Operating System for Truth</h3>
+                    <p>
+                        Cerelytic becomes the standard background process for all major 
+                        enterprise decisions, ensuring mathematical fairness globally.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Manifesto Section -->
+<section id="manifesto" class="manifesto-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-label">PHILOSOPHY</div>
+            <h2 class="section-title">Our Manifesto</h2>
+        </div>
+
+        <div class="manifesto-content reveal">
+            <p class="manifesto-text">
+                <strong>We exist to solve Systemic Friction.</strong> Whether in healthcare billing, 
+                defense logistics, or gaming simulations, complexity creates inefficiency. 
+                Cerelytic automates the resolution of this complexity.
+            </p>
+
+            <div class="manifesto-quote">
+                "We don't build services. We forge the machinery that powers enterprise operations."
+            </div>
+
+            <p class="manifesto-text">
+                Traditional systems accumulate layers of human decision-making, each introducing 
+                latency and bias. Our approach eliminates these layers through <strong>algorithmic 
+                precision</strong> and <strong>autonomous intelligence</strong>.
+            </p>
+
+            <p class="manifesto-text">
+                The future belongs to organizations that operate on <strong>mathematical fairness</strong> 
+                rather than institutional inertia. Cerelytic is building that future, one node at a time.
+            </p>
+
+            <div class="case-studies-visual">
+                <h3 class="case-studies-title">Proven Impact</h3>
+                <div class="case-studies-grid">
+                    <div class="case-study-card">
+                        <div class="case-study-image">
+                            <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="url(#caseGrad1)"/>
+                                <circle cx="150" cy="100" r="60" stroke="white" stroke-width="2" opacity="0.3"/>
+                                <circle cx="150" cy="100" r="40" stroke="white" stroke-width="2" opacity="0.5"/>
+                                <circle cx="150" cy="100" r="20" stroke="white" stroke-width="2" opacity="0.7"/>
+                                <defs>
+                                    <linearGradient id="caseGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#0066FF;stop-opacity:0.9" />
+                                        <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.9" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="case-study-content">
+                            <h4>Healthcare Provider Network</h4>
+                            <p>Reduced billing errors by 73% while processing 2M+ patient records monthly</p>
+                        </div>
+                    </div>
+
+                    <div class="case-study-card">
+                        <div class="case-study-image">
+                            <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="url(#caseGrad2)"/>
+                                <path d="M50 150 L100 100 L150 120 L200 60 L250 80" stroke="white" stroke-width="3" fill="none"/>
+                                <circle cx="50" cy="150" r="6" fill="white"/>
+                                <circle cx="100" cy="100" r="6" fill="white"/>
+                                <circle cx="150" cy="120" r="6" fill="white"/>
+                                <circle cx="200" cy="60" r="6" fill="white"/>
+                                <circle cx="250" cy="80" r="6" fill="white"/>
+                                <defs>
+                                    <linearGradient id="caseGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.9" />
+                                        <stop offset="100%" style="stop-color:#0066FF;stop-opacity:0.9" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="case-study-content">
+                            <h4>Defense Logistics System</h4>
+                            <p>Optimized resource allocation with 89% prediction accuracy across 500+ assets</p>
+                        </div>
+                    </div>
+
+                    <div class="case-study-card">
+                        <div class="case-study-image">
+                            <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="url(#caseGrad3)"/>
+                                <rect x="60" y="60" width="180" height="80" stroke="white" stroke-width="2" rx="4" opacity="0.4"/>
+                                <rect x="80" y="80" width="140" height="40" stroke="white" stroke-width="2" rx="4" opacity="0.6"/>
+                                <line x1="100" y1="100" x2="200" y2="100" stroke="white" stroke-width="2"/>
+                                <defs>
+                                    <linearGradient id="caseGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.9" />
+                                        <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.9" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="case-study-content">
+                            <h4>Simulation Testing Framework</h4>
+                            <p>Stress-tested 10,000+ scenarios identifying 94% of edge cases before deployment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-header">
+            <div class="section-label">ESTABLISH CONNECTION</div>
+            <h2 class="section-title">Initialize Uplink</h2>
+        </div>
+
+        <form class="terminal-form" onsubmit="return handleSubmit(event)">
+            <div class="terminal-header">// DATA TRANSMISSION PROTOCOL</div>
+            
+            <div class="form-group">
+                <label class="form-label" for="name">IDENTIFIER</label>
+                <input type="text" id="name" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">UPLINK ADDRESS</label>
+                <input type="email" id="email" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="organization">ENTITY</label>
+                <input type="text" id="organization" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="message">TRANSMISSION</label>
+                <textarea id="message" class="form-textarea" required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">TRANSMIT</button>
+        </form>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">CERELYTIC</div>
+                    <p class="footer-tagline">
+                        Deep Tech Forge. Building the machinery that powers enterprise operations 
+                        through algorithmic precision and autonomous intelligence.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#capabilities">Capabilities</a></li>
+                        <li><a href="#engine">The Engine</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#manifesto">Manifesto</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Verticals</h4>
+                    <ul class="footer-links">
+                        <li><a href="#capabilities">CLC Health</a></li>
+                        <li><a href="#capabilities">CLC Defence</a></li>
+                        <li><a href="#capabilities">AI Automation</a></li>
+                        <li><a href="#capabilities">Game Development</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>© 2026 CERELYTIC. ALL RIGHTS RESERVED.</div>
+                <div>PROPRIETARY // CONFIDENTIAL</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

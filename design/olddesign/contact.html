@@ -1,0 +1,34 @@
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-header">
+            <div class="section-label">ESTABLISH CONNECTION</div>
+            <h2 class="section-title">Initialize Uplink</h2>
+        </div>
+
+        <form class="terminal-form" onsubmit="return handleSubmit(event)">
+            <div class="terminal-header">// DATA TRANSMISSION PROTOCOL</div>
+            
+            <div class="form-group">
+                <label class="form-label" for="name">IDENTIFIER</label>
+                <input type="text" id="name" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">UPLINK ADDRESS</label>
+                <input type="email" id="email" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="organization">ENTITY</label>
+                <input type="text" id="organization" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="message">TRANSMISSION</label>
+                <textarea id="message" class="form-textarea" required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">TRANSMIT</button>
+        </form>
+    </div>
+</section>
